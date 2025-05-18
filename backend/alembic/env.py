@@ -14,7 +14,7 @@ from alembic import context
 
 load_dotenv()
 
-DATABASE_URL = os.getenv('DATABASE_URL_ALEMBIC')
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 config = context.config
 config.set_main_option('sqlalchemy.url', DATABASE_URL)
