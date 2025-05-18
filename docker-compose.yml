@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     command: >
-      sh -c 'uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload'
+      sh -c 'alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload'
     env_file:
       - .env
     depends_on:
@@ -21,22 +21,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-
-  alembic:
-    build:
-      dockerfile: ./backend/Dockerfile  # Тот же Dockerfile, что и у web
-    container_name: alembic
-    environment:
-      - PYTHONPATH=/code
-    command: >
-      sh -c 'alembic upgrade head'
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
-    volumes:
-      - ./backend:/code
 
   db:
     image: postgres
