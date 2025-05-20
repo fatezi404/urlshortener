@@ -4,7 +4,7 @@ from logging.config import fileConfig
 from dotenv import load_dotenv
 
 from app.db.session import Base
-from app.models import url_model
+from app.models import url_model, user_model
 
 from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import create_async_engine
